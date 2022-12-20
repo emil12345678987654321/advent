@@ -1,3 +1,5 @@
+import numpy as np
+
 if __name__ == '__main__':
     with open('C:/Users/Emil/PycharmProjects/advent/8/exampledata.txt') as f:
 
@@ -5,7 +7,11 @@ if __name__ == '__main__':
             # if x == 0 or x == len(y_axis[0]) - 1 or y == 0 or y == len(y_axis) - 1:
             if x == 0 or x == 98 or y == 0 or y == 98:
                 return True
-            elif height > y_axis[y+1][x] and height > y_axis[y-1][x] and height > y_axis[y][x+1] and height > y_axis[y][x-1]:
+            # elif height > np.array(y_axis[y+1:][x]) and height > np.array(y_axis[y-1:][x]) and height > np.array(y_axis[y][x+1:]) and height > np.array(y_axis[y][x-1:]):
+            elif all(i < height for i in y_axis[y+1:][x]) \
+                    and height > all(i < height for i in y_axis[y-1:][x])\
+                    and height > all(i < height for i in y_axis[y][x+1:])\
+                    gitand height > all(i < height for i in y_axis[y][x-1:]):
                 print(y_axis[y])
                 print("height", height)
                 print("up", y_axis[y+1][x])
